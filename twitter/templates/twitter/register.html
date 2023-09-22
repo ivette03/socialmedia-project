@@ -1,13 +1,14 @@
 {% extends 'twitter/layout.html' %}
 
 {% block content %}
+{% load static %}
 
 <body class="login-page">
     <div class="twitter-login-box">
         <header>
-            <img src="https://static01.nyt.com/images/2014/08/10/magazine/10wmt/10wmt-jumbo-v4.jpg?quality=90&auto=webp"
+            <img src="{% static "img/osito.jpg" %}"
                 alt="twitter logo">
-            <h1>Registrate en Twitter</h1>
+            <h1>Registrate en SociUp</h1>
         </header>
 
         <form method="post">
@@ -35,11 +36,11 @@
                 {{form.password2}}
             </div>
 
-            <button class="twitter-btn">Registrarse</button>
+            <button class="SociUp-btn">Registrarse</button>
         </form>
 
         <div class="footer">
-            <a href="#">¿Ya tienes una cuenta? Login</a>
+            <a href="{% url 'login' %}">¿Ya tienes una cuenta? Login</a>
         </div>
 
     </div>

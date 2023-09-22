@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import home,register,delete,profile,editar,follow
+from .views import home,register,delete,profile,editar,follow,unfollow
 from django.contrib.auth.views import LoginView, LogoutView
 urlpatterns = [
     path('',home,name="home"),
@@ -10,5 +10,6 @@ urlpatterns = [
     path('profile/<str:username>',profile,name="profile"),
     path('editar/',editar,name="editar"),
     path('follow/<str:username>',follow,name='follow'),
+    path('unfollow/<str:username>',unfollow,name='unfollow'),
     
 ]

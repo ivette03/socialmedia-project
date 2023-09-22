@@ -1,8 +1,9 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from .models import Post,Relationship
 from .forms import UserRegisterForm,PostForm,ProfileUpdateForm,UserUpdateForm
 from django.contrib.auth.models import User
-
+from django.contrib.auth.decorators import login_required
+@login_required
 def home(request):
     posts=Post.objects.all()
     if request.method == 'POST':
@@ -37,10 +38,11 @@ def profile(request,username):
     posts=user.posts.all()
     context={'user':user,'posts':posts}
     return render(request,'twitter/profile.html',context)
+@login_required
 def editar(request):
     if request.method == 'POST':
         u_form=UserUpdateForm(request.POST,instance=request.user)
-        p_form=ProfileUpdateForm(request.POST,request.files,instance=request.user.profile)
+        p_form=ProfileUpdateForm(request.POST,request.FILES,instance=request.user.profile)
         if u_form.is_valid() and p_form.is_valid():
             u_form.save()
             p_form.save()
@@ -50,6 +52,7 @@ def editar(request):
         p_form=ProfileUpdateForm()
     context={'u_form':u_form,'p_form':p_form}
     return render(request,'twitter/editar.html',context)
+@login_required
 def follow(request,username):
     current_user=request.user
     to_user=User.objects.get(username=username)
@@ -58,6 +61,12 @@ def follow(request,username):
     rel.save()
     return redirect('home')
 
-
-        
+@login_required
+def unfollow(request, username):
+    current_user = request.user
+    to_user = get_object_or_404(User, username=username) 
+    relationships = Relationship.objects.filter(from_user=current_user, to_user=to_user)
+    if relationships.exists():
+        relationships.delete()
+    return redirect('home')
         

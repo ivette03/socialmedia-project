@@ -4,19 +4,19 @@ from django.utils import timezone
 
 class Profile(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE)
-    bio=models.CharField(default="Hola Wordl",max_length=200)
+    bio=models.CharField(default="Hola mundo",max_length=200)
     image=models.ImageField(default='default.png')
     def __str__(self):
         return (f'Perfil de {self.user.username}')
     #funcion que permite obtener cuenta d eusuarios que tiene esas relaciones
     def following(self):
         user_ids=Relationship.objects.filter(from_user=self.user)\
-                                .values_list('to_user_id', flat=True)
-        return User.objects.filter(id_in=user_ids)
-    def following(self):
+                                  .values_list('to_user_id', flat=True)
+        return User.objects.filter(id__in=user_ids)
+    def followers(self):
         user_ids=Relationship.objects.filter(to_user=self.user)\
-                                .values_list('from_user_id', flat=True)
-        return User.objects.filter(id_in=user_ids)
+                                  .values_list('from_user_id', flat=True)
+        return User.objects.filter(id__in=user_ids)
 class Post(models.Model):
     timestamp=models.DateTimeField(default=timezone.now)
     content=models.TextField(default='hola')
