@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-fp4+!6yp*^x%nlv8$(h+4(@hv)z!l@i2u6x@2vgyp4ezwq_(_e
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL='home'
 LOGOUT_REDIRECT_URL='login'
 
@@ -87,7 +87,10 @@ WSGI_APPLICATION = 'socialmedia.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME':"sociup",
+        "USER": "root",
+        "PASSWORD": "root",
+        "PORT": "5432",
     }
 }
 
