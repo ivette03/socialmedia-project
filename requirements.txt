@@ -32,3 +32,6 @@ tqdm==4.66.1
 tzdata==2023.3
 urllib3==2.0.4
 yarl==1.9.2
+pip==21.2.4
+setuptools==57.5.0
+
