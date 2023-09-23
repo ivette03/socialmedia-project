@@ -84,13 +84,15 @@ WSGI_APPLICATION = 'socialmedia.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME':"sociup",
+        'NAME':"railway",
         "USER": "root",
-        "PASSWORD": "root",
-        "PORT": "5432",
+        "PASSWORD": "pPZqlislXCGTwHSMZZANv",
+        "HOST":"hcontainers-us-west-126.railway.app",
+        "PORT": "6626",
     }
 }
 
